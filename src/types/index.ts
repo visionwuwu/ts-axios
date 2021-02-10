@@ -85,6 +85,10 @@ export interface AxiosInstance extends Axios {
 
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance
+
+  CancelToken: CancelTokenStatic
+  Cancel: CancelStatic
+  isCancel(val: any): boolean
 }
 
 /** 拦截器管理对象对外的接口 */
@@ -107,8 +111,8 @@ export interface RejectedFn {
 
 /** CancelToken类的实例类型接口定义 */
 export interface CancelToken {
-  promise: Promise<string>
-  reason?: string
+  promise: Promise<Cancel>
+  reason?: Cancel
 }
 
 /** cancel取消函数的接口定义 */
@@ -132,4 +136,14 @@ export interface CancelTokenStatic {
   new (executor: CancelExecutor): CancelToken
 
   source(): CancelTokenSource
+}
+
+/** Cancel类实例类型的接口定义 */
+export interface Cancel {
+  message?: string
+}
+
+/** Cancel类的类类型接口定义 */
+export interface CancelStatic {
+  new (message?: string): Cancel
 }
