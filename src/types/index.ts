@@ -120,3 +120,16 @@ export interface Canceler {
 export interface CancelExecutor {
   (cancel: Canceler): void
 }
+
+/** CancelToken类的静态方法的返回值类型接口  */
+export interface CancelTokenSource {
+  token: CancelToken
+  cancel: Canceler
+}
+
+/** CancelToken类的类类型接口 */
+export interface CancelTokenStatic {
+  new (executor: CancelExecutor): CancelToken
+
+  source(): CancelTokenSource
+}
