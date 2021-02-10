@@ -31,6 +31,7 @@ registerErrorRouter()
 registerExtendRouter()
 registerInterceptorRouter()
 registerConfigRouter()
+registerCancelRouter()
 
 function registerSimpleRouter() {
   router.get('/simple/get', function(req, res) {
@@ -133,6 +134,18 @@ function registerConfigRouter() {
   router.post('/config/post', (req, res) => {
     const body = req.body
     res.json(body)
+  })
+}
+function registerCancelRouter() {
+  router.get('/cancel/get', (req, res) => {
+    setTimeout(() => {
+      res.json('cancel/get')
+    }, 3000)
+  })
+  router.post('/cancel/post', (req, res) => {
+    setTimeout(() => {
+      res.json(req.body)
+    }, 3000)
   })
 }
 
