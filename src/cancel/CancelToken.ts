@@ -34,4 +34,10 @@ export default class CancelToken {
       cancel
     }
   }
+
+  throwIfRequested(): void {
+    if (this.reason) {
+      throw this.reason
+    }
+  }
 }

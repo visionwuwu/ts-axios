@@ -113,6 +113,8 @@ export interface RejectedFn {
 export interface CancelToken {
   promise: Promise<Cancel>
   reason?: Cancel
+
+  throwIfRequested(): void
 }
 
 /** cancel取消函数的接口定义 */
