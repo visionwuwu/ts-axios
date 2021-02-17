@@ -6,8 +6,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 const cookieParser = require('cookie-parser')
 
-require('./server2')
-
 const app = express()
 const compiler = webpack(WebpackConfig)
 
@@ -16,6 +14,12 @@ app.use(webpackDevMiddleware(compiler, {
   stats: {
     colors: true,
     chunks: false
+  }
+}))
+
+app.use(express.static(__dirname, {
+  setHeaders(res) {
+    res.cookie('XSRF-TOKEN-D', '1234abc')
   }
 }))
 
@@ -160,6 +164,8 @@ function registerMoreRouter() {
 }
 
 app.use(router)
+
+require('./server2')
 
 const port = process.env.PORT || 8080
 module.exports = app.listen(port, () => {
