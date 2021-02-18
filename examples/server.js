@@ -186,6 +186,9 @@ function registerMoreRouter() {
     res.status(304)
     res.end()
   })
+  router.get('/more/get1', function(req, res) {
+    res.json(req.query)
+  })
 }
 
 app.use(router)

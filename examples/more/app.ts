@@ -1,7 +1,8 @@
 import axios from '../../src/index'
-import NProgress, { start } from 'nprogress'
+import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { AxiosError } from '../../src/helpers/error'
+import qs from 'qs'
 
 document.cookie = 'a=b'
 
@@ -107,4 +108,23 @@ axios.get('/more/304', {
   console.log(res);
 }).catch((e: AxiosError) => {
   console.log(e.message);
+})
+
+axios.get('/more/get1', {
+  params: new URLSearchParams('a=b&c=d')
+}).then(res => {
+  console.log(res);
+})
+
+axios.get('/more/get1', {
+  params: {
+    a: 1,
+    b: 2,
+    c: ['a', 'b', 'c']
+  },
+  paramsSerializer(params) {
+    return qs.stringify(params, { arrayFormat: 'brackets' })
+  }
+}).then(res => {
+  console.log(res);
 })
