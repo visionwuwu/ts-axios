@@ -2,28 +2,28 @@ import axios from '../../src/index'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-// document.cookie = 'a=b'
+document.cookie = 'a=b'
 
-// axios.get('/more/get', {
-//   withCredentials: false
-// }).then(res => {
-//   console.log(res);
-// })
+axios.get('/more/get', {
+  withCredentials: false
+}).then(res => {
+  console.log(res);
+})
 
-// axios.post('http://localhost:8088/more/server2', {}, {
-//   withCredentials: true
-// }).then(res => {
-//   console.log(res);
-// })
+axios.post('http://localhost:8088/more/server2', {}, {
+  withCredentials: true
+}).then(res => {
+  console.log(res);
+})
 
-// const instance = axios.create({
-//   xsrfCookieName: 'XSRF-TOKEN-D',
-//   xsrfHeaderName: 'X-XSRF-TOKEN-D'
-// })
+const instance = axios.create({
+  xsrfCookieName: 'XSRF-TOKEN-D',
+  xsrfHeaderName: 'X-XSRF-TOKEN-D'
+})
 
-// instance.get('/more/get').then(res => {
-//   console.log(res);
-// })
+instance.get('/more/get').then(res => {
+  console.log(res);
+})
 
 const instance2 = axios.create()
 
@@ -78,4 +78,16 @@ uploadEl.addEventListener('click', (e) => {
     data.append('file', fileEl.files[0])
     instance2.post('/more/upload', data)
   }
+})
+
+axios.post('/more/post', {
+  a: 1,
+  b: 2
+}, {
+  auth: {
+    username: 'Yee',
+    password: '123456'
+  }
+}).then(res => {
+  console.log(res);
 })
